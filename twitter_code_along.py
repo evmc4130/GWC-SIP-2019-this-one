@@ -99,7 +99,6 @@ for i in range(len(tweetData)):
 	dictionaree["tweet"] = textList[i]
 	leest.append(dictionaree)
 
-
 tweetstring = ""
 for tweet in textList:
 	tweet = tweet + ""
@@ -108,9 +107,62 @@ print(tweetstring)
 tString = ""
 for tweet in textList:
 	tString += tweet + ' '
-wordcloud = WordCloud().generate(tweetstring)
+wordcloud = WordCloud(height = 1000, width = 1000).generate(tweetstring)
 plt.figure(figsize = (8,8), facecolor = None)
-plt.imshow(wordcloud, interpolation = "biliniear")
+plt.imshow(wordcloud, interpolation = "bilinear")
 plt.axis("off")
 plt.tight_layout(pad = 0)
+plt.show()
+
+print(polarityList)
+print(min(polarityList), max(polarityList))
+n, bins, patches = plt.hist(polarityList)
+plt.axis([-0.55, 1, 0.0, 45])
+
+
+
+def countLetter(string, letter):
+	counter = 0
+	for let in string:
+		if let.lower() == letter:
+			counter += 1
+	return counter
+
+
+
+countLetter(tweetstring, "a")
+alpha = ['k', 'j', 'w', 'g', 'c', 'r', 'l', 'y', 'a', 'n', 't', 'i', 'o', 'v', 'd', 'b', 'p', 'e', 's', 'z', 'u', 'x', 'f', 'q', 'm', 'h']
+letters = sorted(alpha)
+
+for letter in letters:
+	print(f"letter:{letter} occurrences:{countLetter(tweetstring, letter)}")
+
+occurrences = []
+for letter in letters:
+	occurrences.append(countLetter(tweetstring, letter))
+print(occurrences)
+print(min(occurrences), max(occurrences))
+plt.hist(occurrences)
+plt.axis([min(occurrences), max(occurrences),0 , 10])
+plt.show()
+
+
+
+def wordCount(stringOfTweet, string1):
+	counter = 0
+	string1 = string1.lower()
+	wordList = stringOfTweet.split(' ')
+	for i in wordList:
+		if i == string1:
+			counter += 1
+	return countLetter
+
+wordCountList = []
+for i in textList:
+	wordoccurrence = wordCount(i, "the")
+	wordCountList.append(wordoccurrence)
+print(wordCountList)
+print(min(wordCountList), max(wordCountList))
+plt.hist(wordCountList)
+plt.axis([min(wordCountList), max(wordCountList),0 , 10])
 plt.show()
