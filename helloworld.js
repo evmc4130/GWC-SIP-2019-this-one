@@ -40,3 +40,10 @@ function changeFonts(){
   }
   loc2.setAttribute("style", `font-family:${allFonts[pos2]}`)
 }
+
+document.getElementById("specialfont").addEventListener("click",
+  function (){
+    // alert("DUUUUUUDE");
+    document.getElementById("specialfont").style.color = "green"
+  }
+)
